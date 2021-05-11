@@ -3,7 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Home from '../home/Home';
 import CountriesPage from '../countries/CountriesPage';
-import DetailPage from '../countries/DetailPage';
+import DetailPage from '../country/DetailPage';
 import {
   BrowserRouter as Router,
   Route,
