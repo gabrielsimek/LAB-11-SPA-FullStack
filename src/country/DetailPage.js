@@ -19,7 +19,7 @@ export default class DetailPage extends Component {
   render() {
     
     const { country } = this.state;
-    if (!country) return null;
+    if (!country) return (<img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="loading"/>);
     console.log(country.name);
     return (
         
