@@ -11,3 +11,8 @@ export async function getResource(id) {
   const response = await request.get(`${URL}/${id}`);
   return response.body;
 }
+
+export async function addResource(country) {
+  const response = await request.post(URL).send(country);
+  return response.body;
+}

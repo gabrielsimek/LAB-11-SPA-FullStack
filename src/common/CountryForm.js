@@ -3,25 +3,31 @@ import './CountryForm.css';
 
 export default class CountryForm extends Component {
     state = {
-      name: '',
-      president: '',
-      language: '',
-      capital: '',
-      url: '',
-      population: undefined,
-      hasBeach: ''
+    //   name: '',
+    //   president: '',
+    //   language: '',
+    //   capital: '',
+    //   url: '',
+    //   population: '',
+    //   hasBeach: ''
 
-    //   name: 'Colombia',
-    //   president: 'Iván Duque Márquez',
-    //   language: 'Spanish',
-    //   capital: 'Bogota',
-    //   url: 'https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Colombia.svg',
-    //   population: 17684536,
+      name: 'TestCountry',
+      president: 'Test President',
+      language: 'test lang',
+      capital: 'city',
+      url: 'https://placekitten.com/200/300',
+      population: '99999',
+      hasBeach: true
 
     }
+     
 
-    handleSubmit = (e) => {
+    handleSubmit = e => {
       e.preventDefault();
+      const { onSubmit } = this.props;
+      console.log(onSubmit);
+      onSubmit(this.state);
+
 
     }
 
@@ -57,7 +63,7 @@ export default class CountryForm extends Component {
     render() {
       const { name, president, language, capital, url, population, hasBeach } = this.state;
       return (
-        <form className="CountryForm">
+        <form className="CountryForm" onSubmit={this.handleSubmit}>
           <p>
             <label>
               <input placeholder="Name of Country" required
