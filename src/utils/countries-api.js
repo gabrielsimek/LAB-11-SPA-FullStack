@@ -16,3 +16,8 @@ export async function addResource(country) {
   const response = await request.post(URL).send(country);
   return response.body;
 }
+
+export async function deleteResource(id) {
+  const response = await request.delete(`${URL}/${id}`);
+  return response.body;
+}
