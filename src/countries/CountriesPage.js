@@ -5,29 +5,40 @@ import CountriesList from './CountriesList';
 
 export default class CountriesPage extends Component {
     state = {
-      countries: []
+      countries: [],
+      loading: true
 
     }
 
     async componentDidMount() {
-      const countriesFromApi = await getResources();
-      if (countriesFromApi) {
-        this.setState({ countries: countriesFromApi });
+      try { const countriesFromApi = await getResources();
+        if (countriesFromApi) {
+          this.setState({ countries: countriesFromApi });
+        }
+        else {
+          console.log('network error');
+        }
       }
-      else {
-        console.log('network error');
+  
+      catch (err) {
+        console.log(err);
+      }
+
+      finally {
+        this.setState({ loading: false });
+    
       }
     }
-
     render() {
       
-      const { countries } = this.state;
+      const { countries, loading } = this.state;
       console.log(countries);
       return (
         <div className="CountriesPage">
           <h2>List of Countries</h2>
 
           <CountriesList countries={countries}/>
+          {loading && <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="loading"/>}
          
 
         </div>
