@@ -2,6 +2,8 @@ import { Component } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Home from '../home/Home';
+import CountriesPage from '../countries/CountriesPage';
+import DetailPage from '../countries/DetailPage';
 import {
   BrowserRouter as Router,
   Route,
@@ -28,13 +30,13 @@ class App extends Component {
 
               <Route path="/countries" exact={true}
                 render={routerProps => (
-                  <div>Implement a page of resources</div>
+                  <CountriesPage {...routerProps} />
                 )}
               />
 
               <Route path="/countries/:id"
                 render={routerProps => (
-                  <div>Implement a page for id {routerProps.match.params.id}</div>
+                  <DetailPage {...routerProps}/>
                 )}
               />
 
