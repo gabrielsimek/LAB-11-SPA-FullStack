@@ -10,7 +10,6 @@ export default class DetailPage extends Component {
   async componentDidMount() {
     const { match } = this.props;
     const countryFromApi = await getResource(match.params.id);
-    // console.log(countryFromApi);
     if (countryFromApi) {
       this.setState({ country: countryFromApi });
     } else {
@@ -19,13 +18,13 @@ export default class DetailPage extends Component {
   }
 
    handleDelete = async () => {
-     const { match, history } = this.props;
-     const countryToDeleteId = match.params.id;
-     if (!window.confirm(`Delete ${countryToDeleteId}`)) return;
+     const { country } = this.state;
+     const { history } = this.props;
+     
+     if (!window.confirm(`Delete ${country.name}?`)) return;
 
      try {
-       const deletedCountry = await deleteResource(countryToDeleteId);
-       console.log(deletedCountry);
+       await deleteResource(country.id);
        history.push(`/countries`);
       
 

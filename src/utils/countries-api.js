@@ -21,3 +21,9 @@ export async function deleteResource(id) {
   const response = await request.delete(`${URL}/${id}`);
   return response.body;
 }
+
+export async function getLanguages() {
+  const response = await request.get('/api/countries/languages');
+  return response.body;
+
+}

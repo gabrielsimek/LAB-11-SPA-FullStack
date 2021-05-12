@@ -32,7 +32,7 @@ export default class CountriesPage extends Component {
     render() {
       
       const { countries, loading } = this.state;
-      console.log(countries);
+     
       return (
         <div className="CountriesPage">
           <h2>List of Countries</h2>

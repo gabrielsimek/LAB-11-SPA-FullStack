@@ -1,32 +1,34 @@
 import { Component } from 'react';
 import './CountryForm.css';
+import { getLanguages } from '../utils/countries-api.js';
 
 export default class CountryForm extends Component {
     state = {
-    //   name: '',
-    //   president: '',
-    //   language: '',
-    //   capital: '',
-    //   url: '',
-    //   population: '',
-    //   hasBeach: ''
-
+  
       name: 'TestCountry',
       president: 'Test President',
       language: 'test lang',
       capital: 'city',
       url: 'https://placekitten.com/200/300',
       population: '99999',
-      hasBeach: true
+      hasBeach: true,
+      languages: []
+
 
     }
-     
+    async componentDidMount() {
+      const languages = await getLanguages();
+      console.log(languages);
+      this.setState({ languages: languages });
+
+    }
 
     handleSubmit = e => {
       e.preventDefault();
       const { onSubmit } = this.props;
-      console.log(onSubmit);
-      onSubmit(this.state);
+      const { name, president, language, capital, url, population, hasBeach } = this.state;
+      console.log(name, president, language, capital, url, population, hasBeach);
+      onSubmit({ name, president, language, capital, url, population, hasBeach });
 
 
     }
@@ -61,7 +63,7 @@ export default class CountryForm extends Component {
     }
   
     render() {
-      const { name, president, language, capital, url, population, hasBeach } = this.state;
+      const { name, president, language, capital, url, population, hasBeach, languages } = this.state;
       return (
         <form className="CountryForm" onSubmit={this.handleSubmit}>
           <p>
@@ -86,9 +88,11 @@ export default class CountryForm extends Component {
               <select name="Language" required 
                 value={language} onChange={this.handleChangeLanguage}
               >
-                <option>Select Language</option>
-                <option>Spanish</option>
-                <option>Portuguese </option>
+                
+                {languages.map((lang, index) => {
+                  return <option key={index} value={lang.language}>{lang.language}</option>;
+                })}
+                
                       
               </select>
             </label>
