@@ -4,6 +4,7 @@ import Footer from './Footer';
 import Home from '../home/Home';
 import CountriesPage from '../countries/CountriesPage';
 import DetailPage from '../country/DetailPage';
+import AddCountryPage from '../add-country/AddCountryPage';
 import {
   BrowserRouter as Router,
   Route,
@@ -31,6 +32,12 @@ class App extends Component {
               <Route path="/countries" exact={true}
                 render={routerProps => (
                   <CountriesPage {...routerProps} />
+                )}
+              />
+
+              <Route path="/countries/add" exact={true}
+                render={routerProps => (
+                  <AddCountryPage {...routerProps} />
                 )}
               />
 
