@@ -15,6 +15,8 @@ export default class CountryItem extends Component {
           <h2>Country: {country.name}</h2>
           <img src={country.url} alt={`Flag of ${country.name}`}></img>
           <p>President: {country.president}</p>
+          <p>Language: {country.language}</p>
+          <p>Ocean: {country.hasBeach ? 'Yes' : 'No'}</p>
           <p>Population: {country.population}</p>
 
         </Link>
