@@ -27,3 +27,7 @@ export async function getLanguages() {
   return response.body;
 
 }
+export async function updateResource(country) {
+  const response = await request.put(`${URL}/${country.id}`).send(country);
+  return response.body;
+}

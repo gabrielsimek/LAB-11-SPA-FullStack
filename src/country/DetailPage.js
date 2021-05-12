@@ -1,7 +1,10 @@
 import { Component } from 'react';
 import './DetailPage.css';
+
 import { getResource } from '../utils/countries-api.js';
 import { deleteResource } from '../utils/countries-api.js';
+import { Link } from 'react-router-dom';
+
 
 export default class DetailPage extends Component {
   state = {
@@ -49,6 +52,8 @@ export default class DetailPage extends Component {
          <p>Population: {country.population}</p>
          <p>User: {country.userId}</p>
          <button onClick={this.handleDelete}>Delete</button>
+         <Link to={`/countries/${country.id}/edit`}>Edit Country</Link>
+         
        </li>
       
      );
