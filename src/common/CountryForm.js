@@ -1,31 +1,40 @@
 import { Component } from 'react';
 import './CountryForm.css';
+import { getLanguages } from '../utils/countries-api.js';
 
 export default class CountryForm extends Component {
     state = {
-    //   name: '',
-    //   president: '',
-    //   language: '',
-    //   capital: '',
-    //   url: '',
-    //   population: '',
-    //   hasBeach: ''
+  
+      name: '',
+      president: '',
+      language: '',
+      capital: '',
+      url: '',
+      // 'https://placekitten.com/200/300'
+      population: '',
+      hasBeach: true,
+      languages: []
 
-      name: 'TestCountry',
-      president: 'Test President',
-      language: 'test lang',
-      capital: 'city',
-      url: 'https://placekitten.com/200/300',
-      population: '99999',
-      hasBeach: true
 
     }
-     
+    async componentDidMount() {
+      const languages = await getLanguages();
+      const { country } = this.props;
+      this.setState({ languages: languages });
+      if (country) {
+        
+        this.setState(country);
+        // const { name, president, language, capital, url, population, hasBeach } = this.props;
+        // this.setState({ name: name, president: president, language: language, capital: capital, url: url, population: population, hasBeach: hasBeach });
+      }
+
+    }
 
     handleSubmit = e => {
       e.preventDefault();
       const { onSubmit } = this.props;
-      console.log(onSubmit);
+      // const { name, president, language, capital, url, population, hasBeach } = this.state;
+      // onSubmit({ name, president, language, capital, url, population, hasBeach });
       onSubmit(this.state);
 
 
@@ -61,7 +70,8 @@ export default class CountryForm extends Component {
     }
   
     render() {
-      const { name, president, language, capital, url, population, hasBeach } = this.state;
+      const { name, president, language, capital, url, population, hasBeach, languages } = this.state;
+      const { country } = this.props;
       return (
         <form className="CountryForm" onSubmit={this.handleSubmit}>
           <p>
@@ -86,9 +96,11 @@ export default class CountryForm extends Component {
               <select name="Language" required 
                 value={language} onChange={this.handleChangeLanguage}
               >
-                <option>Select Language</option>
-                <option>Spanish</option>
-                <option>Portuguese </option>
+                
+                {languages.map((lang, index) => {
+                  return <option key={index} value={lang.language}>{lang.language}</option>;
+                })}
+                
                       
               </select>
             </label>
@@ -120,6 +132,7 @@ export default class CountryForm extends Component {
          
           <p>
             <label>
+              <span>Has Beach?</span>
               <select
                 name="beach" required 
                 value={hasBeach} onChange={this.handleChangeBeach}
@@ -132,7 +145,7 @@ export default class CountryForm extends Component {
             </label>
           </p>
           
-          <button>Add Country</button>
+          <button>{country ? 'Update' : 'Add'}</button>
         </form>
       );
     }

@@ -1,7 +1,10 @@
 import { Component } from 'react';
 import './DetailPage.css';
+
 import { getResource } from '../utils/countries-api.js';
 import { deleteResource } from '../utils/countries-api.js';
+import { Link } from 'react-router-dom';
+
 
 export default class DetailPage extends Component {
   state = {
@@ -10,7 +13,6 @@ export default class DetailPage extends Component {
   async componentDidMount() {
     const { match } = this.props;
     const countryFromApi = await getResource(match.params.id);
-    // console.log(countryFromApi);
     if (countryFromApi) {
       this.setState({ country: countryFromApi });
     } else {
@@ -19,13 +21,13 @@ export default class DetailPage extends Component {
   }
 
    handleDelete = async () => {
-     const { match, history } = this.props;
-     const countryToDeleteId = match.params.id;
-     if (!window.confirm(`Delete ${countryToDeleteId}`)) return;
+     const { country } = this.state;
+     const { history } = this.props;
+     
+     if (!window.confirm(`Delete ${country.name}?`)) return;
 
      try {
-       const deletedCountry = await deleteResource(countryToDeleteId);
-       console.log(deletedCountry);
+       await deleteResource(country.id);
        history.push(`/countries`);
       
 
@@ -50,6 +52,8 @@ export default class DetailPage extends Component {
          <p>Population: {country.population}</p>
          <p>User: {country.userId}</p>
          <button onClick={this.handleDelete}>Delete</button>
+         <Link to={`/countries/${country.id}/edit`}>Edit Country</Link>
+         
        </li>
       
      );
