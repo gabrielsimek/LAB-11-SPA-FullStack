@@ -50,6 +50,9 @@ export default class DetailPage extends Component {
          <img src={country.url} alt={`Flag of ${country.name}`}></img>
          <p>President: {country.president}</p>
          <p>Population: {country.population}</p>
+         <p>Language: {country.language}</p>
+         <p>Has Ocean: {country.hasBeach ? 'Yes' : 'No'}</p>
+
          <p>User: {country.userId}</p>
          <button onClick={this.handleDelete}>Delete</button>
          <Link to={`/countries/${country.id}/edit`}>Edit Country</Link>
